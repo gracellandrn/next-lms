@@ -14,10 +14,15 @@
     "@heroui/react": "^2.8.2",
     "@heroui/system": "^2.4.20",
     "@heroui/theme": "^2.4.20",
+    "@prisma/client": "^6.13.0",
+    "@types/bcrypt": "^6.0.0",
+    "bcrypt": "^6.0.0",
     "framer-motion": "^12.23.12",
     "next": "15.4.6",
+    "prisma": "^6.13.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "zod": "^4.0.16"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
