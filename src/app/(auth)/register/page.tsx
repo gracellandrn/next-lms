@@ -3,8 +3,9 @@
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import Link from "next/link";
-import { registerAction } from "./action";
 import { useActionState } from "react";
+
+import { registerAction } from "./action";
 
 export default function Page() {
   const [state, formAction, pending] = useActionState(registerAction, null);
@@ -21,7 +22,7 @@ export default function Page() {
           name="name"
           placeholder="Name"
           required
-          defaultValue={state?.data?.name as string}
+          defaultValue={state?.data?.name}
         />
         {state?.status === "error" && state.errors?.name ? (
           <div className="msg msg-error">{state.errors.name}</div>
@@ -31,7 +32,7 @@ export default function Page() {
           placeholder="Email"
           type="email"
           required
-          defaultValue={state?.data?.email as string}
+          defaultValue={state?.data?.email}
         />
         {state?.status === "error" && state.errors?.email ? (
           <div className="msg msg-error">{state.errors.email}</div>
@@ -41,7 +42,7 @@ export default function Page() {
           placeholder="Password"
           type="password"
           required
-          defaultValue={state?.data?.password as string}
+          defaultValue={state?.data?.password}
         />
         {state?.status === "error" && state.errors?.password ? (
           <div className="msg msg-error">{state.errors.password}</div>
