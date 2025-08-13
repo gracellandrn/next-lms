@@ -1,6 +1,9 @@
 "use server";
 
 import bycrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import z from "zod";
 
 import { userService } from "@/services/user.services";
@@ -69,8 +72,23 @@ export async function loginAction(prevState: unknown, formData: FormData) {
     };
   }
 
-  return {
-    status: "success",
-    message: "Login success",
+  //JWT
+  const payload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    avatar: user.avatarUrl,
   };
+
+  const jwtToken = jwt.sign(payload, process.env.JWT_SECRET);
+
+  const cookieStore = await cookies();
+
+  cookieStore.set("token", jwtToken, {
+    httpOnly: true,
+    path: "/",
+  });
+
+  redirect("/my-courses");
 }

@@ -5,6 +5,7 @@ import { Input } from "@heroui/input";
 import Link from "next/link";
 import { useActionState } from "react";
 
+import { SocialLogin } from "../_components/social-login";
 import { loginAction } from "./action";
 
 export default function Page() {
@@ -28,7 +29,7 @@ export default function Page() {
         <Input
           name="password"
           placeholder="Password"
-          type="passwprd"
+          type="password"
           defaultValue={state?.data?.password}
         />
         {state?.status === "error" && state.errors?.password ? (
@@ -49,6 +50,7 @@ export default function Page() {
           <div className="msg msg-success">{state.message}</div>
         ) : null}
       </form>
+      <SocialLogin />
       <section>
         <p>
           Don&apos;t have an account?{" "}
