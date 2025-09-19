@@ -21,7 +21,3 @@ export const emailServices = {
     }
   },
 };
-//from
-//to
-//subject
-//html

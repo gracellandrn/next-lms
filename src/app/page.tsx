@@ -1,9 +1,99 @@
 import { Button } from "@heroui/button";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Page() {
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { currencyFormat } from "@/libs/currency-format";
+import { CourseServices } from "@/services/course.services";
+
+export default async function Page() {
+  const courses = await CourseServices.getAllCourse();
   return (
-    <div>
-      <Button color="primary">test</Button>
-    </div>
+    <main className="flex min-h-screen flex-col justify-between">
+      <Header />
+      <section className="flex min-h-96 flex-col items-center justify-center space-y-32 py-32">
+        <div className="max-w-4xl space-y-4 text-center">
+          <h1 className="text-balance">
+            Make knowledge investment for your future
+          </h1>
+          <h3 className="text-slate-500">Start learning with nextlms.</h3>
+        </div>
+        <div className="m-auto grid max-w-4xl grid-cols-6 items-center gap-12">
+          <Image
+            src="/logo/nextjs.png"
+            alt="NextJs"
+            width={1000}
+            height={500}
+          />
+          <Image
+            src="/logo/postgresql.png"
+            alt="PostgreSQL"
+            width={1000}
+            height={500}
+          />
+          <Image src="/logo/react2.png" alt="React" width={1000} height={500} />
+          <Image
+            src="/logo/tailwind.png"
+            alt="Tailwind"
+            width={1000}
+            height={500}
+          />
+        </div>
+      </section>
+      <section className="mx-32 rounded-2xl bg-indigo-600 p-24 text-white">
+        <div className="max-w-2xl m-auto space-y-6 pb-12 text-balance text-center">
+          <h2>
+            Learning in better way, with our courses could boost your skillset
+          </h2>
+          <h4>Nextlms. is a platform where you can learn anything!</h4>
+        </div>
+        <div className="grid grid-cols-3 gap-10">
+          {courses.map((course) => {
+            return (
+              <main key={course.id}>
+                <h4>{course.title}</h4>
+                <div>
+                  <Image
+                    src={`${process.env.R2_PUBLIC_URL}/next-lms/courses/${course.id}/${course.coverImage}`}
+                    alt={course.title}
+                    width={1000}
+                    height={500}
+                  />
+                </div>
+                {course.flashSales?.id && (
+                  <div className="absolute right-4 top-4 z-10 rounded-lg bg-slate-950 px-3 py-2 font-bold text-white">
+                    Flash Sale!
+                  </div>
+                )}
+                <div className="grid grid-cols-3 gap-2">
+                  <Button
+                    variant="shadow"
+                    size="sm"
+                    className="col-span-2 shadow-slate-600"
+                  >
+                    Buy{" "}
+                    {course.flashSales?.id
+                      ? currencyFormat(course.flashSales.newAmount)
+                      : currencyFormat(course.price)}
+                  </Button>
+                  <Link href={`/${course.slug}`}>
+                    <Button
+                      variant="shadow"
+                      size="sm"
+                      className="shadow-slate-600"
+                    >
+                      View
+                    </Button>
+                  </Link>
+                </div>
+              </main>
+            );
+          })}
+        </div>
+      </section>
+      <section></section>
+      <Footer />
+    </main>
   );
 }

@@ -9,6 +9,11 @@ const envSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().min(1),
   GOOGLE_CLIENT_SECRET: z.string().min(1),
   GOOGLE_REDIRECT_URL: z.string().min(1),
+  R2_PUBLIC_URL: z.string().min(1),
+  R2_ACCESS_ID: z.string().min(1),
+  R2_SECRET_KEY: z.string().min(1),
+  R2_S3API_URL: z.string().min(1),
+  MAYAR_API_KEY: z.string().min(1),
 });
 
 const validation = envSchema.safeParse({
@@ -18,6 +23,11 @@ const validation = envSchema.safeParse({
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_REDIRECT_URL: process.env.GOOGLE_REDIRECT_URL,
+  R2_PUBLIC_URL: process.env.R2_PUBLIC_URL,
+  R2_ACCESS_ID: process.env.R2_ACCESS_ID,
+  R2_SECRET_KEY: process.env.R2_SECRET_KEY,
+  R2_S3API_URL: process.env.R2_S3API_URL,
+  MAYAR_API_KEY: process.env.MAYAR_API_KEY,
 });
 
 if (!validation.success) {

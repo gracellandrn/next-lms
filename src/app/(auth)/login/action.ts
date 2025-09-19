@@ -90,5 +90,5 @@ export async function loginAction(prevState: unknown, formData: FormData) {
     path: "/",
   });
 
-  redirect("/my-courses");
+  redirect("/dashboard/my-courses");
 }
